@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace eMovie
 {
     public class Program
@@ -9,7 +11,10 @@ namespace eMovie
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddDbContext<AppDbContext>();
+            builder.Services.AddDbContext<AppDbContext>(options=> 
+            options.UseSqlServer(
+                builder.Configuration.GetConnectionString("DefaultConnectionString")
+                ));
 
             var app = builder.Build();
 
