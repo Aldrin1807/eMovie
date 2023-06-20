@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eMovie.Controllers
 {
@@ -11,9 +12,10 @@ namespace eMovie.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var movies = await _context.Movies.Include(n=>n.Cinema).ToListAsync();
+            return View(movies);
         }
     }
 }
