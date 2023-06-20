@@ -2,28 +2,28 @@
     //Define the models
 
 *@
-@model IEnumerable<Actor>
+@model IEnumerable<Producer>
 @*
     Define ViewData
 *@
 @{
-    ViewData["Title"] = "List of Actors";
+    ViewData["Title"] = "List of Producers";
 }
 
-<h1>Welcome to Actors view</h1>
+<h1>Welcome to Producers view</h1>
 
 <div class="row">
     <div class«"col-md-8 offset-md-2">
         <table class="table">
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>@Html.DisplayNameFor(m=>m.ProfilePictureURL)</th>
                     <th>@Html.DisplayNameFor(m=>m.FullName)</th>
                     <th>@Html.DisplayNameFor(m=>m.Bio)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach(var item in Model)
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td class="align-middle">
@@ -36,8 +36,8 @@
                             @item.Bio
                         </td>
                         <td class="align-middle">
-                           <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a>
-                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a> 
+                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a>
+                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a>
                             <a class="btn btn-danger"><i class="bi bi-pencil-square"></i> Delete </a>
 
                         </td>
@@ -46,12 +46,12 @@
 
 
             </tbody>
-            
-        
-        
-        </table>            
-        </div>
+
+
+
+        </table>
     </div>
+</div>
 
 
 
