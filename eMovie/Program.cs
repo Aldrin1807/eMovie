@@ -1,3 +1,4 @@
+using eMovie.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovie
@@ -16,7 +17,12 @@ namespace eMovie
                 builder.Configuration.GetConnectionString("DefaultConnectionString")
                 ));
 
+
+            builder.Services.AddScoped<IActorsService, ActorsService>();
+
+
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
