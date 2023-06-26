@@ -41,6 +41,7 @@ namespace eMovie.Controllers
 
 
         //GET: Actors/Details/5
+       
         public async Task<IActionResult> Details(int id)
         {
             var actor = await _service.GetActorById(id);
@@ -49,6 +50,43 @@ namespace eMovie.Controllers
                 return View("Empty");
             }
             return View(actor);
+        }
+
+        //GET: Actors/Delete/5
+        
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actor = await _service.GetActorById(id);
+            if (actor == null) {  return View("Empty");}
+            return View(actor);
+        }
+
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _service.DeleteActor(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        //GET: Actors/Edit/5
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actor = await _service.GetActorById(id);
+            if (actor == null) { return View("Empty"); }
+            return View(actor);
+        }
+
+        [HttpPost,ActionName("Edit")]
+        public async Task<IActionResult> Edit(int id, [Bind("FullName,ProfilePictureURL,Bio")]ActorDTO actor)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(actor);
+            }
+            _service.UpdateActor(id, actor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

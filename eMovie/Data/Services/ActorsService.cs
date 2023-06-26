@@ -27,7 +27,12 @@ namespace eMovie.Data.Services
 
         public void DeleteActor(int id)
         {
-            throw new NotImplementedException();
+            var actor = _context.Actors.FirstOrDefault(a => a.Id == id);
+            if (actor != null)
+            {
+                _context.Actors.Remove(actor);
+              _context.SaveChangesAsync();
+            }
         }
 
         public async Task<Actor> GetActorById(int id)
@@ -43,9 +48,14 @@ namespace eMovie.Data.Services
         
         }
 
-        public Actor UpdateActor(Actor actor)
+        public async Task<Actor> UpdateActor(int id,ActorDTO actor)
         {
-            throw new NotImplementedException();
+            var _actor = await _context.Actors.FirstOrDefaultAsync(a => a.Id == id);
+            _actor.FullName = actor.FullName;
+            _actor.Bio = actor.Bio;
+            _actor.ProfilePictureURL = actor.ProfilePictureURL;
+            _context.SaveChangesAsync();
+            return _actor;
         }
     }
 }

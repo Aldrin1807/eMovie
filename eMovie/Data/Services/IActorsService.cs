@@ -9,7 +9,7 @@ namespace eMovie.Data.Services
 
         Task<Actor> GetActorById(int id);
         void AddActor(ActorDTO actor);
-        Actor UpdateActor(Actor actor);
+        Task<Actor> UpdateActor(int id,ActorDTO actor);
         void DeleteActor(int id);
 
 
