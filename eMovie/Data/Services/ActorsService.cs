@@ -1,4 +1,5 @@
-﻿using eMovie.Models;
+﻿using eMovie.Data.DTOs;
+using eMovie.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovie.Data.Services
@@ -12,9 +13,15 @@ namespace eMovie.Data.Services
                 _context= context;
         }
 
-        public void AddActor(Actor actor)
+        public async void AddActor(ActorDTO actor)
         {
-           _context.Actors.Add(actor);
+            var _actor = new Actor
+            {
+                FullName = actor.FullName,
+                Bio = actor.Bio,
+                ProfilePictureURL = actor.ProfilePictureURL
+            };
+          await _context.Actors.AddAsync(_actor);
            _context.SaveChanges();
         }
 
@@ -23,9 +30,10 @@ namespace eMovie.Data.Services
             throw new NotImplementedException();
         }
 
-        public Actor GetActorById(int id)
+        public async Task<Actor> GetActorById(int id)
         {
-            throw new NotImplementedException();
+            var actor =await _context.Actors.FirstOrDefaultAsync(a => a.Id == id);
+            return actor;
         }
 
         public async Task<IEnumerable<Actor>> GetAllActors()

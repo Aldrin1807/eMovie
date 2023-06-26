@@ -1,4 +1,5 @@
-﻿using eMovie.Data.Services;
+﻿using eMovie.Data.DTOs;
+using eMovie.Data.Services;
 using eMovie.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,7 @@ namespace eMovie.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")]Actor actor)
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")]ActorDTO actor)
         {
            if (!ModelState.IsValid)
             {
@@ -36,6 +37,18 @@ namespace eMovie.Controllers
             }
             _service.AddActor(actor);
             return RedirectToAction(nameof(Index));
+        }
+
+
+        //GET: Actors/Details/5
+        public IActionResult Details(int id)
+        {
+            var actor = _service.GetActorById(id);
+            if (actor == null)
+            {
+                return View("Empty");
+            }
+            return View(actor);
         }
     }
 }
