@@ -7,7 +7,7 @@ namespace eMovie.Data.Services
     {
         Task<IEnumerable<Actor>> GetAllActors();
 
-       async Task<Actor> GetActorById(int id);
+        Task<Actor> GetActorById(int id);
         void AddActor(ActorDTO actor);
         Actor UpdateActor(Actor actor);
         void DeleteActor(int id);

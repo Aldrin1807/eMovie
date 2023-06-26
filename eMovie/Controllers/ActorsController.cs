@@ -41,9 +41,9 @@ namespace eMovie.Controllers
 
 
         //GET: Actors/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var actor = _service.GetActorById(id);
+            var actor = await _service.GetActorById(id);
             if (actor == null)
             {
                 return View("Empty");
