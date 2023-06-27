@@ -5,6 +5,7 @@ namespace eMovie.Data.DTOs
 {
     public class MovieDTO
     {
+        public int Id { get; set; }
 
         [Display(Name = "Movie name")]
         [Required(ErrorMessage = "Name is required")]

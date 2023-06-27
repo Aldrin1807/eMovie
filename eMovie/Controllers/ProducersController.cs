@@ -35,6 +35,10 @@ namespace eMovie.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName,Bio,ProfilePictureURL")]ProducerDTO producer)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(producer);
+            }
             _service.AddProducer(producer);
             return RedirectToAction("Index");
         }
@@ -49,6 +53,10 @@ namespace eMovie.Controllers
         [HttpPost,ActionName("Edit")]
         public async Task<IActionResult> Edit(int id, [Bind("FullName,Bio,ProfilePictureURL")]ProducerDTO producer)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(producer);
+            }
             _service.UpdateProducer(id, producer);
             return RedirectToAction(nameof(Index));
         }

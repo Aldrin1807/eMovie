@@ -7,5 +7,11 @@ namespace eMovie.Data.Services
     {
         Task<List<Movie>> GetAllMovies();
         Task<MovieDropdowns> GetMovieDropdownsValues();
+
+        Task CreateMovie(MovieDTO movieDTO);
+
+        Task<Movie> GetMovieById(int id);
+
+        Task UpdateMovie(MovieDTO movieDTO);
     }
 }

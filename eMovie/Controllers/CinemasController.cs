@@ -29,6 +29,10 @@ namespace eMovie.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Logo","Name","Description")]CinemaDTO cinema)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(cinema);
+            }
             _service.AddCinema(cinema);
             return RedirectToAction(nameof(Index));
         }
@@ -75,6 +79,10 @@ namespace eMovie.Controllers
         [HttpPost,ActionName("Edit")]
         public async Task<IActionResult> Edit(int id, [Bind("Logo","Name","Description")]CinemaDTO cinema)
         {
+            if(!ModelState.IsValid)
+            {
+                return View(cinema);
+            }
             var updatedCinema =  _service.UpdateCinema(id, cinema);
             if (updatedCinema == null)
             {
