@@ -71,5 +71,16 @@ namespace eMovie.Controllers
             }
             return View(cinema);
         }
+
+        [HttpPost,ActionName("Edit")]
+        public async Task<IActionResult> Edit(int id, [Bind("Logo","Name","Description")]CinemaDTO cinema)
+        {
+            var updatedCinema =  _service.UpdateCinema(id, cinema);
+            if (updatedCinema == null)
+            {
+                return View("Empty");
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
