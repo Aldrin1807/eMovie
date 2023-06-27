@@ -37,7 +37,7 @@ namespace eMovie.Data.Services
 
         public async Task<Cinema> UpdateCinema(int id, CinemaDTO cinema)
         {
-            var cinemaToUpdate = await _context.Cinemas.FindAsync(id);
+            var cinemaToUpdate =  _context.Cinemas.FirstOrDefault(i => i.Id==id);
             if (cinemaToUpdate == null)
             {
                 return null;
@@ -51,7 +51,7 @@ namespace eMovie.Data.Services
 
         public async void DeleteCinema(int id)
         {
-            var cinemaToDelete = await _context.Cinemas.FindAsync(id);
+            var cinemaToDelete = _context.Cinemas.FirstOrDefault(i=> i.Id == id);
             if (cinemaToDelete == null)
             {
                 return;

@@ -54,7 +54,7 @@ namespace eMovie.Controllers
             }
             return View(cinema);
         }
-        [HttpDelete, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             _service.DeleteCinema(id);
