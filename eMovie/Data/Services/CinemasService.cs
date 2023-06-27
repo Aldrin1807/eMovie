@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eMovie.Data.Services
 {
-    public class CinemasService:ICinemaService
+    public class CinemasService:ICinemasService
     {
         private readonly AppDbContext _context;
 
@@ -13,9 +13,9 @@ namespace eMovie.Data.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Cinema>> GetAllCinemas()
+        public  IEnumerable<Cinema> GetAllCinemas()
         {
-            return await _context.Cinemas.ToListAsync();
+            return  _context.Cinemas.ToList();
         }
 
         public async Task<Cinema> GetCinemaById(int id)
@@ -32,7 +32,7 @@ namespace eMovie.Data.Services
                 Logo = cinema.Logo
             };
             await _context.Cinemas.AddAsync(newCinema);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public async Task<Cinema> UpdateCinema(int id, CinemaDTO cinema)
@@ -45,7 +45,7 @@ namespace eMovie.Data.Services
             cinemaToUpdate.Name = cinema.Name;
             cinemaToUpdate.Description = cinema.Description;
             cinemaToUpdate.Logo = cinema.Logo;
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return cinemaToUpdate;
         }
 
@@ -57,7 +57,7 @@ namespace eMovie.Data.Services
                 return;
             }
             _context.Cinemas.Remove(cinemaToDelete);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
     }

@@ -3,9 +3,9 @@ using eMovie.Models;
 
 namespace eMovie.Data.Services
 {
-    public interface ICinemaService
+    public interface ICinemasService
     {
-        Task<IEnumerable<Cinema>> GetAllCinemas();
+        IEnumerable<Cinema> GetAllCinemas();
 
         Task<Cinema> GetCinemaById(int id);
         void AddCinema(CinemaDTO cinema);

@@ -6,9 +6,9 @@ namespace eMovie.Controllers
 {
     public class CinemasController : Controller
     {
-        private readonly ICinemaService _service;
+        private readonly ICinemasService _service;
 
-        public CinemasController(ICinemaService service)
+        public CinemasController(ICinemasService service)
         {
             _service = service;
         }
@@ -59,6 +59,17 @@ namespace eMovie.Controllers
         {
             _service.DeleteCinema(id);
             return RedirectToAction(nameof(Index));
+        }
+
+        //GET: Cinemas/Edit/5
+        public async Task<IActionResult> Edit(int id)
+        {
+            var cinema = await _service.GetCinemaById(id);
+            if (cinema == null)
+            {
+                return View("Empty");
+            }
+            return View(cinema);
         }
     }
 }
