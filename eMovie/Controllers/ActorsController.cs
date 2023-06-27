@@ -85,7 +85,7 @@ namespace eMovie.Controllers
             {
                 return View(actor);
             }
-            _service.UpdateActor(id, actor);
+           await _service.UpdateActor(id, actor);
             return RedirectToAction(nameof(Index));
         }
     }

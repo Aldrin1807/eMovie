@@ -13,7 +13,8 @@ namespace eMovie.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var cinemas = _context.Cinemas.ToList();
+            return View(cinemas);
         }
     }
 }
