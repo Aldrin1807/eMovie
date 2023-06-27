@@ -20,9 +20,7 @@ namespace eMovie
 
             builder.Services.AddScoped<IActorsService, ActorsService>();
             builder.Services.AddScoped<ICinemasService, CinemasService>();
-          
-            
-            //  builder.Services.AddScoped<IProducersService, ProducersService>();
+            builder.Services.AddScoped<IProducersService, ProducersService>();
 
 
             var app = builder.Build();
