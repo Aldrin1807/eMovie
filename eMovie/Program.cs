@@ -1,4 +1,7 @@
 using eMovie.Data.Services;
+using eMovie.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovie
@@ -22,6 +25,17 @@ namespace eMovie
             builder.Services.AddScoped<ICinemasService, CinemasService>();
             builder.Services.AddScoped<IProducersService, ProducersService>();
             builder.Services.AddScoped<IMoviesService, MoviesService>();
+
+            //Authentication and authorization
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            builder.Services.AddMemoryCache();
+            builder.Services.AddSession();
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
+
+            builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
 
