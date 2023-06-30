@@ -45,7 +45,7 @@ namespace eMovie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Actors");
+                    b.ToTable("Actors", (string)null);
                 });
 
             modelBuilder.Entity("eMovie.Models.Actor_Movie", b =>
@@ -60,7 +60,7 @@ namespace eMovie.Migrations
 
                     b.HasIndex("ActorId");
 
-                    b.ToTable("Actors_Movies");
+                    b.ToTable("Actors_Movies", (string)null);
                 });
 
             modelBuilder.Entity("eMovie.Models.Cinema", b =>
@@ -85,7 +85,7 @@ namespace eMovie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Cinemas");
+                    b.ToTable("Cinemas", (string)null);
                 });
 
             modelBuilder.Entity("eMovie.Models.Movie", b =>
@@ -132,7 +132,7 @@ namespace eMovie.Migrations
 
                     b.HasIndex("ProducerId");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movies", (string)null);
                 });
 
             modelBuilder.Entity("eMovie.Models.Producer", b =>
@@ -157,7 +157,7 @@ namespace eMovie.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Producers");
+                    b.ToTable("Producers", (string)null);
                 });
 
             modelBuilder.Entity("eMovie.Models.Actor_Movie", b =>
