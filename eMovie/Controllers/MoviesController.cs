@@ -114,5 +114,14 @@ namespace eMovie.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> Filter(string searchString)
+        {
+            var movies = await _service.Filter(searchString);
+            return View("Index",movies);
+        }
+
     }
 }

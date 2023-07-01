@@ -104,5 +104,13 @@ namespace eMovie.Data.Services
             }
             await _context.SaveChangesAsync();
         }
+
+
+        public async Task<List<Movie>> Filter(string searchString)
+        {
+            var movies = await _context.Movies.Include(n => n.Cinema).Include(n => n.Producer).Include(n => n.Actors_Movies).ThenInclude(n => n.Actor).Where(m => searchString.Contains(m.Name)).ToListAsync();
+
+            return movies;
+        }
     }
 }

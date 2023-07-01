@@ -13,5 +13,7 @@ namespace eMovie.Data.Services
         Task<Movie> GetMovieById(int id);
 
         Task UpdateMovie(MovieDTO movieDTO);
+
+        Task<List<Movie>> Filter(string searchString);
     }
 }
