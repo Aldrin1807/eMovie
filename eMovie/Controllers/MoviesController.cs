@@ -1,11 +1,14 @@
-﻿using eMovie.Data.DTOs;
+﻿using eMovie.Data;
+using eMovie.Data.DTOs;
 using eMovie.Data.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovie.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
     public class MoviesController : Controller
     {
         private readonly IMoviesService _service;
@@ -15,6 +18,7 @@ namespace eMovie.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var movies =await _service.GetAllMovies();
@@ -48,8 +52,9 @@ namespace eMovie.Controllers
             await  _service.CreateMovie(movie);
             return RedirectToAction(nameof(Index));
         }
-        
+
         //GEt   : Movies/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var movie = await _service.GetMovieById(id);
@@ -116,6 +121,7 @@ namespace eMovie.Controllers
 
 
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Filter(string searchString)
         {

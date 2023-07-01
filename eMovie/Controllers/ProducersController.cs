@@ -1,10 +1,13 @@
-﻿using eMovie.Data.DTOs;
+﻿using eMovie.Data;
+using eMovie.Data.DTOs;
 using eMovie.Data.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace eMovie.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
     public class ProducersController : Controller
     {
         private readonly IProducersService _service;
@@ -20,6 +23,7 @@ namespace eMovie.Controllers
             return View(producers);
         }
         // GET: ProducersController/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var producer = _service.GetProducerById(id);

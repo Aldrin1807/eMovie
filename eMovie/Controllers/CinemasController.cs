@@ -1,9 +1,12 @@
-﻿using eMovie.Data.DTOs;
+﻿using eMovie.Data;
+using eMovie.Data.DTOs;
 using eMovie.Data.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eMovie.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class CinemasController : Controller
     {
         private readonly ICinemasService _service;
@@ -38,6 +41,7 @@ namespace eMovie.Controllers
         }
 
         //Get: Cinemas/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var cinema = await _service.GetCinemaById(id);
