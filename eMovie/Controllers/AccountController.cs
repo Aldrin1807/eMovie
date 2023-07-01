@@ -3,6 +3,7 @@ using eMovie.Data.DTOs;
 using eMovie.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eMovie.Controllers
 {
@@ -22,7 +23,12 @@ namespace eMovie.Controllers
             _roleManager = roleManager;
         }
 
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.ToListAsync();
 
+            return View(users);
+        }
 
         public IActionResult Login() => View(new LoginDTO());
 
