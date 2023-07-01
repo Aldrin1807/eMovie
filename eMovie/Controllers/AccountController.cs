@@ -89,7 +89,7 @@ namespace eMovie.Controllers
 
             if (newUser.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, UserRoles.Admin);
+                await _userManager.AddToRoleAsync(user, UserRoles.User);
                 _context.SaveChanges();
             }
             else
