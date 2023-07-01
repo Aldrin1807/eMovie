@@ -16,6 +16,7 @@ namespace eMovie.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var cinemas = _service.GetAllCinemas();

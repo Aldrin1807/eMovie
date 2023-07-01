@@ -17,6 +17,7 @@ namespace eMovie.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var producers = _service.GetAllProducers();

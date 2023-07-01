@@ -20,6 +20,7 @@ namespace eMovie.Controllers
             _service = service;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllActors();
