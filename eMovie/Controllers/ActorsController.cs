@@ -1,4 +1,5 @@
-﻿using eMovie.Data.DTOs;
+﻿using eMovie.Data;
+using eMovie.Data.DTOs;
 using eMovie.Data.Services;
 using eMovie.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using System.Configuration;
 
 namespace eMovie.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
@@ -43,7 +45,7 @@ namespace eMovie.Controllers
 
 
         //GET: Actors/Details/5
-       
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var actor = await _service.GetActorById(id);
@@ -55,7 +57,6 @@ namespace eMovie.Controllers
         }
 
         //GET: Actors/Delete/5
-        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var actor = await _service.GetActorById(id);
@@ -73,7 +74,7 @@ namespace eMovie.Controllers
 
 
         //GET: Actors/Edit/5
-        [Authorize]
+
         public async Task<IActionResult> Edit(int id)
         {
             var actor = await _service.GetActorById(id);
