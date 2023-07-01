@@ -15,7 +15,7 @@ namespace eMovie.Data.Services
 
         public async Task<List<Order>> GetOrdersByUserIdAndRole(string userId, string userRole)
         {
-            var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Include(n => n.User).ToListAsync();
+            List<Order> orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Include(n => n.User).ToListAsync();
 
             if (userRole != "Admin")
             {

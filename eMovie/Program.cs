@@ -1,3 +1,4 @@
+using eMovie.Data;
 using eMovie.Data.Services;
 using eMovie.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -25,6 +26,11 @@ namespace eMovie
             builder.Services.AddScoped<ICinemasService, CinemasService>();
             builder.Services.AddScoped<IProducersService, ProducersService>();
             builder.Services.AddScoped<IMoviesService, MoviesService>();
+            builder.Services.AddScoped<IOrdersService, OrderService>();
+
+
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
             //Authentication and authorization
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
@@ -36,6 +42,7 @@ namespace eMovie
             });
 
             builder.Services.AddControllersWithViews();
+
 
 
 
@@ -54,6 +61,7 @@ namespace eMovie
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
