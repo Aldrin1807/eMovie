@@ -37,6 +37,8 @@ namespace eMovie
 
             builder.Services.AddControllersWithViews();
 
+
+
             var app = builder.Build();
 
 
@@ -53,7 +55,9 @@ namespace eMovie
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.MapControllerRoute(
                 name: "default",
@@ -63,5 +67,6 @@ namespace eMovie
 
             app.Run();
         }
+
     }
 }

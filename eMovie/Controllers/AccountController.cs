@@ -10,14 +10,16 @@ namespace eMovie.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly AppDbContext _context;
 
         public AccountController(UserManager<ApplicationUser> userManager,
-                       SignInManager<ApplicationUser> signInManager, AppDbContext context)
+                       SignInManager<ApplicationUser> signInManager, AppDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _roleManager = roleManager;
         }
 
 
@@ -60,12 +62,15 @@ namespace eMovie.Controllers
         {
             if (!ModelState.IsValid) { return View(register); }
 
-            var isUser = _userManager.FindByEmailAsync(register.EmailAddress);
+            var isUser = await _userManager.FindByEmailAsync(register.EmailAddress);
             if (isUser != null)
             {
                 TempData["Error"] = "User already exists";
                 return View(register);
             }
+
+            await CreateRoleIfNotExists(UserRoles.Admin);
+            await CreateRoleIfNotExists(UserRoles.User);
 
             var user = new ApplicationUser()
             {
@@ -77,12 +82,29 @@ namespace eMovie.Controllers
             var newUser = await _userManager.CreateAsync(user, register.Password);
 
             if (newUser.Succeeded)
+            {
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
+                _context.SaveChanges();
+            }
+            else
+            {
+                foreach (var error in newUser.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View(register);
+            }
 
-            return View("RegisterCompleted");
+            return View("RCompleted");
             
         }
-
+        private async Task CreateRoleIfNotExists(string roleName)
+        {
+            if (!await _roleManager.RoleExistsAsync(roleName))
+            {
+                await _roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> Logout()

@@ -48,6 +48,12 @@
                         <input asp-for="ConfirmPassword" class="form-control" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
+                    <ul style="color:red">
+                        <li>At least 6 characters</li>
+                        <li>Passwords must have at least one non alphanumeric character.</li>
+                        <li>Passwords must have at least one lowercase ('a'-'z').</li>
+                        <li>Passwords must have at least one uppercase ('A'-'Z').</li>
+                    </ul>
 
                     <div class="form-group">
                         <input class="btn btn-outline-success float-right" type="submit" value="Sign up" />
