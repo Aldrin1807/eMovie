@@ -1,9 +1,11 @@
 ﻿using eMovie.Data.DTOs;
 using eMovie.Data.Services;
 using eMovie.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Configuration;
 
 namespace eMovie.Controllers
 {
@@ -53,7 +55,7 @@ namespace eMovie.Controllers
         }
 
         //GET: Actors/Delete/5
-        
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             var actor = await _service.GetActorById(id);
@@ -71,6 +73,7 @@ namespace eMovie.Controllers
 
 
         //GET: Actors/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int id)
         {
             var actor = await _service.GetActorById(id);
