@@ -15,7 +15,9 @@ E-Movie is an online platform hosted on Azure, with the database also hosted on 
 
 The website caters to two types of users: simple users and admins. Simple users can browse and search for movies, view movie details, order tickets, and add items to their cart. The movies are associated with a producer, cinema, and a list of actors. For payment simulation, PayPal Sandbox integration is utilized.
 
-Admin users have additional privileges and can perform CRUD (Create, Read, Update, Delete) operations on all entities. To access the admin functionality, use the following credentials:
+Admin users have additional privileges and can perform CRUD (Create, Read, Update, Delete) operations on all entities, and also has a section to see the orders that are made and a table of registered users.
+
+To access the admin functionality, use the following credentials:
 
 - Email: aldrin@gmail.com
 - Password: Aldrin_123
